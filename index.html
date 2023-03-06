@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+      }
+      body{
+        text-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        
+      }
+     h1{
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        letter-spacing: .04em;
+        color: #AA5656;
+        background-color:#FFD56F;
+        width: fit-content;
+        padding: 10px;
+        margin-top: 20px;
+     }
+    .clock {
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        /* min-height: 70vh; */
+        align-items: center;
+        height: 150px;
+        border-radius: 50%;
+        display: flex;
+        /* background-color: aliceblue; */
+        border: 20px solid white;
+        margin: 50px auto;
+        position: relative;
+        padding: 2rem;
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1), inset 0 0 0 3px #efefef,
+          inset 0 0 10px black, 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      .clock-face{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid black; */
+        transform: translateY(-3px);
+
+      }
+      .hand{
+        width:50%;
+        height: 6px;
+        background-color: black;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(.1 ,2.7,.58,1);
+      }
+      .hour-hand{
+        width:50%;
+        height: 6px;
+        border-radius: 10px;
+        background-color: rgb(193, 244, 84);
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(.1 ,2.7,.58,1);
+      }
+      .second-hand{
+        width:50%;
+        height: 6px;
+        border-radius: 10px;
+        background-color: #FF0303;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(.1 ,2.7,.58,1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Analog clock<br> Time Now</h1>
+    <div class="clock">
+        <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+</div>
+    <script>
+        const secondHand = document.querySelector('.second-hand');
+        const minHand = document.querySelector('.min-hand');
+        const hourHand = document.querySelector('.hour-hand');
+
+
+      function setTime() {
+        var now = new Date();
+        
+        
+        var seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60)*360) + 90;
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+        var mins = now.getMinutes();
+        const minsDegrees = ((mins / 60) * 360) +((seconds / 60)*6) + 90;
+        minHand.style.transform = `rotate(${minsDegrees}deg)`;
+        
+        var hours = now.getHours();
+        const hoursDegrees = ((hours / 12) * 360) + ((mins / 60)*30) + 90;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+      }
+      setInterval(setTime, 1000);
+
+      setTime();
+
+    </script>
+  </body>
+</html>
